@@ -17,6 +17,7 @@ public class Item implements Serializable {
     private int codigo;
     private String nome;
     private String codigoBaras;
+    private double valorUnitario;
     private String um;
     private int estoqueMinimo;
     private String fornecedor;
@@ -24,10 +25,11 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(int codigo, String nome, String codigoBaras, String um, int estoqueMinimo, String fornecedor) {
+    public Item(int codigo, String nome, String codigoBaras, double valorUnitario, String um, int estoqueMinimo, String fornecedor) {
         this.codigo = codigo;
         this.nome = nome;
         this.codigoBaras = codigoBaras;
+        this.valorUnitario = valorUnitario;
         this.um = um;
         this.estoqueMinimo = estoqueMinimo;
         this.fornecedor = fornecedor;
@@ -60,6 +62,14 @@ public class Item implements Serializable {
 
     public void setCodigoBaras(String codigoBaras) {
         this.codigoBaras = codigoBaras;
+    }
+
+    public double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
     }
 
     public String getUm() {
