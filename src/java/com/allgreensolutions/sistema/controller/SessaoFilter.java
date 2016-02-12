@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Gabriel
  */
-public class SessaoUsuarioFilter implements Filter {
+public class SessaoFilter implements Filter {
 
     private static final boolean debug = true;
 
@@ -33,13 +33,13 @@ public class SessaoUsuarioFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public SessaoUsuarioFilter() {
+    public SessaoFilter() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("SessaoUsuarioFilter:DoBeforeProcessing");
+            log("SessaoFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -67,7 +67,7 @@ public class SessaoUsuarioFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("SessaoUsuarioFilter:DoAfterProcessing");
+            log("SessaoFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -102,8 +102,11 @@ public class SessaoUsuarioFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
+        String pagina = ((HttpServletRequest) request).getServletPath();
+        System.out.println(pagina);
+
         if (debug) {
-            log("SessaoUsuarioFilter:doFilter()");
+            log("SessaoFilter:doFilter()");
         }
 
         doBeforeProcessing(request, response);
@@ -113,11 +116,14 @@ public class SessaoUsuarioFilter implements Filter {
             HttpSession session = ((HttpServletRequest) request).getSession();
             Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
 
-            if (usuario == null) {
-                session.setAttribute("msg", "Você não está logado no sistema!");
-                ((HttpServletResponse) response).sendRedirect("../login.jsp");
+            /* Se não está logado e não está na página de login*/
+            if (usuario == null && !pagina.equals("/login.jsp")) {
+                ((HttpServletResponse) response).sendRedirect("/AllGreen/login.jsp");
+            /* Se está logado e está na página de login */
+            } else if (usuario != null && pagina.equals("/login.jsp")) {
+                ((HttpServletResponse) response).sendRedirect("paginas/menu.jsp");
+            /* Está logado e não está na página de login: continua normalmente */
             } else {
-//                session.setAttribute("usuario", usuario);
                 chain.doFilter(request, response);
             }
         } catch (Throwable t) {
@@ -172,7 +178,7 @@ public class SessaoUsuarioFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {
-                log("SessaoUsuarioFilter:Initializing filter");
+                log("SessaoFilter:Initializing filter");
             }
         }
     }
@@ -183,9 +189,9 @@ public class SessaoUsuarioFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("SessaoUsuarioFilter()");
+            return ("SessaoFilter()");
         }
-        StringBuffer sb = new StringBuffer("SessaoUsuarioFilter(");
+        StringBuffer sb = new StringBuffer("SessaoFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="shortcut icon" href="32x32.ico">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>AllGreen Sistema</title>
+        <title>AllGreen - Login</title>
         <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="resources/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
         <script src="resources/bootstrap/js/bootstrap.js"></script>
