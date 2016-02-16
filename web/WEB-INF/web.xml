@@ -17,6 +17,10 @@
         <servlet-name>Sair</servlet-name>
         <servlet-class>com.allgreensolutions.sistema.controller.SairServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ItemServlet</servlet-name>
+        <servlet-class>com.allgreensolutions.sistema.controller.ItemServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ValidarLogin</servlet-name>
         <url-pattern>/ValidarLogin</url-pattern>
@@ -24,6 +28,10 @@
     <servlet-mapping>
         <servlet-name>Sair</servlet-name>
         <url-pattern>/Sair</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ItemServlet</servlet-name>
+        <url-pattern>/Item/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

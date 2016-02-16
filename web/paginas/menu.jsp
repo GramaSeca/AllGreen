@@ -48,7 +48,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#"target="iframe_content">Cadastro de Clientes</a></li>
                                 <li><a href="#" target="iframe_content">Cadastro de Fornecedores</a></li>
-                                <li><a href="../cadastros/itemcadast.jsp" target="iframe_content">Cadastro de Itens</a></li>
+                                <li><a href="../Item/cadastro" target="iframe_content">Cadastro de Itens</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Nav header</li>
                                 <li><a href="#" target="iframe_content">Separated link</a></li>
@@ -60,7 +60,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#" target="iframe_content">Consulta de Clientes</a></li>
                                 <li><a href="#" target="iframe_content">Consulta de Fornecedores</a></li>
-                                <li><a href="../consultas/itemconsult.jsp" target="iframe_content">Consulta de Itens</a></li>
+                                <li><a href="../Item/consulta" target="iframe_content">Consulta de Itens</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Nav header</li>
                                 <li><a href="#" target="iframe_content">Separated link</a></li>

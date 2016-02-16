@@ -36,8 +36,8 @@ public class ValidarLoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         try (PrintWriter out = response.getWriter()) {
-            String usuario = request.getParameter("usuario");
-            String senha = request.getParameter("senha");
+            String usuario = request.getParameter("allgreenUsuario");
+            String senha = request.getParameter("allgreenSenha");
             
             UsuarioDAO dao = new UsuarioDAOJPA();
             Usuario u = dao.findUsuarioLogin(usuario, senha);                        
@@ -46,7 +46,8 @@ public class ValidarLoginServlet extends HttpServlet {
                 request.getSession().setAttribute("usuarioLogado", u);
                 response.sendRedirect("paginas/menu.jsp");
             }else{
-                request.getSession().setAttribute("usuario", usuario);
+                request.getSession().setAttribute("allgreenUsuario", usuario);
+                request.getSession().setAttribute("erro", "Usuário ou senha inválidos.");
                 response.sendRedirect("login.jsp");
             }
         }

@@ -16,7 +16,7 @@ public class Item implements Serializable {
     @GeneratedValue
     private int codigo;
     private String nome;
-    private String codigoBaras;
+    private String codigoBarras;
     private double valorUnitario;
     private String um;
     private int estoqueMinimo;
@@ -28,7 +28,7 @@ public class Item implements Serializable {
     public Item(int codigo, String nome, String codigoBaras, double valorUnitario, String um, int estoqueMinimo, String fornecedor) {
         this.codigo = codigo;
         this.nome = nome;
-        this.codigoBaras = codigoBaras;
+        this.codigoBarras = codigoBaras;
         this.valorUnitario = valorUnitario;
         this.um = um;
         this.estoqueMinimo = estoqueMinimo;
@@ -56,12 +56,12 @@ public class Item implements Serializable {
         this.nome = nome;
     }
 
-    public String getCodigoBaras() {
-        return codigoBaras;
+    public String getCodigoBarras() {
+        return codigoBarras;
     }
 
-    public void setCodigoBaras(String codigoBaras) {
-        this.codigoBaras = codigoBaras;
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
     }
 
     public double getValorUnitario() {
