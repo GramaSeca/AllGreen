@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/AllGreen"/>
+<Context path="/AllGreen">
+    <!-- datasource -->
+    <Resource name="jdbc/dballgreenPOOL"
+              auth="Container"
+              scope="Shareable"
+              type="javax.sql.DataSource"
+              username="postgres"
+              password="post4474"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost:5432/dballgreen?ApplicationName=AllGreen-SistemaPOOL"
+              initialSize="1"
+              maxTotal="10"
+              maxIdle="9"
+              maxWaitMillis="10000"/>
+</Context>

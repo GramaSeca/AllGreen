@@ -6,7 +6,7 @@
     <head>
         <link rel="shortcut icon" href="../32x32.ico">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>AllGreen - Sistema</title>
+        <title>Sistema</title>
         <link href="../resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="../resources/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
         <script src="../resources/bootstrap/js/bootstrap.js"></script>
@@ -48,7 +48,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#"target="iframe_content">Cadastro de Clientes</a></li>
                                 <li><a href="#" target="iframe_content">Cadastro de Fornecedores</a></li>
-                                <li><a href="../Item/cadastro" target="iframe_content">Cadastro de Itens</a></li>
+                                <li><a href="../Item/incluir" target="iframe_content">Cadastro de Itens</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Nav header</li>
                                 <li><a href="#" target="iframe_content">Separated link</a></li>

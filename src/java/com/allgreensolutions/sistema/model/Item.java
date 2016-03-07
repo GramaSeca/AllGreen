@@ -20,19 +20,17 @@ public class Item implements Serializable {
     private double valorUnitario;
     private String um;
     private int estoqueMinimo;
-    private String fornecedor;
 
     public Item() {
     }
 
-    public Item(int codigo, String nome, String codigoBaras, double valorUnitario, String um, int estoqueMinimo, String fornecedor) {
+    public Item(int codigo, String nome, String codigoBaras, double valorUnitario, String um, int estoqueMinimo) {
         this.codigo = codigo;
         this.nome = nome;
         this.codigoBarras = codigoBaras;
         this.valorUnitario = valorUnitario;
         this.um = um;
         this.estoqueMinimo = estoqueMinimo;
-        this.fornecedor = fornecedor;
     }
 
     @Override
@@ -86,13 +84,5 @@ public class Item implements Serializable {
 
     public void setEstoqueMinimo(int estoqueMinimo) {
         this.estoqueMinimo = estoqueMinimo;
-    }
-
-    public String getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(String fornecedor) {
-        this.fornecedor = fornecedor;
     }
 }

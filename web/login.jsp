@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="32x32.ico">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-        <title>AllGreen - Login</title>
+        <title>Login</title>
         <!--JQuery to the Modal Dialog-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -37,10 +37,12 @@
     <body>
         <div class="row">
             <div class="col-md-6 container-fluid text-center floatingdivs">
+            <!--
                 <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 text-center vertical-center" style="box-shadow: none;">
                     <img src="resources/img/logo-allgreen.png" class="img-responsive">
                     <h1 class="fonte-verde">Organize sua empresa!</h1>
                 </div>
+            -->
             </div>
             <div class="row col-md-6 container-fluid floatingdivs verde">
                 <div class="panel panel-default col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 text-center vertical-center">

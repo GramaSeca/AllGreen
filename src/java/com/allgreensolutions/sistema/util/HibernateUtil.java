@@ -1,5 +1,6 @@
 package com.allgreensolutions.sistema.util;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;

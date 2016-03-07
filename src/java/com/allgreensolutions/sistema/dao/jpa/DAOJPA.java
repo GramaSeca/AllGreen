@@ -3,9 +3,20 @@ package com.allgreensolutions.sistema.dao.jpa;
 import com.allgreensolutions.sistema.dao.DAO;
 import com.allgreensolutions.sistema.model.Item;
 import com.allgreensolutions.sistema.util.HibernateUtil;
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.sql.DataSource;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 /**
@@ -17,21 +28,21 @@ import org.hibernate.Transaction;
 public abstract class DAOJPA<T, I> implements DAO<T, I> {
 
     @Override
-    public T save(T entity) {
+    public T salvar(T entity) {
         T saved;
 
         Session session = HibernateUtil.openSession();
 //        if(isUserExists(item)) return false;        
 
-        Transaction tx = null;
+        Transaction transaction = null;
         try {
-            tx = session.getTransaction();
-            tx.begin();
+            transaction = session.getTransaction();
+            transaction.begin();
             session.merge(entity);
-            tx.commit();
+            transaction.commit();
         } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
+            if (transaction != null) {
+                transaction.rollback();
             }
             e.printStackTrace();
         } finally {
@@ -41,8 +52,23 @@ public abstract class DAOJPA<T, I> implements DAO<T, I> {
     }
 
     @Override
-    public boolean remove(Class<T> classe, I pk) {
-        return false;
+    public boolean excluir(Class<T> classe, I pk) {
+        Session sessao = HibernateUtil.openSession();
+        T entidade;
+//        Item item;
+        try {
+            entidade = (T) sessao.load(classe, (Serializable)pk);
+//            item = (Item) sessao.load(Item.class, (Serializable) pk);
+            sessao.getTransaction().begin();
+            sessao.delete(entidade);
+//            sessao.createQuery("DELETE FROM " + classe.getSimpleName() + " x WHERE x.codigo=" + pk).executeUpdate();
+            sessao.getTransaction().commit();
+        } finally {
+            sessao.close();
+            System.out.println("FECHOU excluir");
+        }
+
+        return true;
     }
 
     @Override
@@ -51,17 +77,29 @@ public abstract class DAOJPA<T, I> implements DAO<T, I> {
     }
 
     @Override
-    public List<T> getAll(Class<T> classe, int min, int max) {
-        return HibernateUtil.openSession()
-                .createQuery("select x from " + classe.getSimpleName() + " x")
-                .setFirstResult(min).setMaxResults(max).list();
+    public List<T> getAll(Class<T> classe, int firstResult, int maxResults) {
+        Session sessao = HibernateUtil.openSession();
+        try {
+            return sessao.createQuery("select x from " + classe.getSimpleName() + " x order by x.codigo DESC")
+                    .setMaxResults(maxResults)
+                    .setFirstResult(firstResult).list();
+        } finally {
+            sessao.close();
+            System.out.println("FECHOU");
+        }
     }
 
     @Override
-    public T getById(Class<T> classe, I pk) {
-        return (T) HibernateUtil.openSession()
-                .createQuery("SELECT x FROM " + classe.getSimpleName() + " x WHERE x.codigo = " + pk)
-                .uniqueResult();
+    public T buscarPorCodigo(Class<T> classe, I pk) {
+        Session sessao = HibernateUtil.openSession();
+        try {
+            return (T) sessao
+                    .createQuery("SELECT x FROM " + classe.getSimpleName() + " x WHERE x.codigo = " + pk)
+                    .uniqueResult();
+        } finally {
+            sessao.close();
+            System.out.println("FECHOU buscarPorCodigo");
+        }
     }
 
     @Override

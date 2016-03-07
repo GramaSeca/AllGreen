@@ -1,5 +1,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,33 +55,36 @@
         </nav>
         <div class="cinza2 container-fluid">
             <div class="divs row">
-                <div class="col-md-4"><input type="text" id="search" placeholder="Buscar"/></div>
+                <div class="col-md-4">
+                    <input name="buscarItem" type="text" id="search" placeholder="Buscar"/>
+                </div>
                 <input type="submit" value="Buscar" class="col-md-1 botoes buscar">
             </div>
             <div class="divs" id="divtable">
                 <table class="table-reponsive col-xs-12 tabela">
                     <thead>
                         <tr>
-                            <th>Item</th>
-                            <th>Descrição</th>
-                            <th>Fornecedor</th>
-                            <th>Valor Unitário</th>
-                            <th>Unidade</th>
-                            <th>Estoque Mínimo</th>
+                            <th><b>Item</b></th>
+                            <th><b>Descrição</b></th>
+                            <th><b>Valor Unitário</b></th>
+                            <th><b>UM</b></th>
+                            <th><b>Estoque Mínimo</b></th>
                             <th></th>
                         </tr>
                     </thead>
-                    <c:forEach var="item" items="${itens}">
-                        <tbody>
-                        <th>${item.codigo}</th>
-                        <th>${item.nome}</th>
-                        <th>${item.fornecedor}</th>
-                        <th>${item.valorUnitario}</th>
-                        <th>${item.um}</th>
-                        <th>${item.estoqueMinimo}</th>
-                        <th><a href="../Item/alterar?codigo=${item.codigo}" class="glyphicon glyphicon-edit"/></th>
-                        </tbody>
-                    </c:forEach>
+                    <tbody>
+                        <c:forEach var="item" items="${itens}">
+                            <tr>
+                                <td align="center"><a href="../Item/alterar?codigo=${item.codigo}">${item.codigo}</a></td>
+                                <td align="left">${fn:substring(item.nome,0,70)}</td>
+                                <td align="right">${item.valorUnitario}</td>
+                                <td align="center">${fn:toUpperCase(item.um)}</td>
+                                <td align="right">${item.estoqueMinimo}</td>
+                                <!--<td align="center"><span class="glyphicon glyphicon-edit"/></td>-->
+                                <td align="center"><a href="../Item/excluir?codigo=${item.codigo}" class="glyphicon glyphicon-trash" onclick="confirm('Confirma exclusão?');"/></td>
+                            </tr>    
+                        </c:forEach>
+                    </tbody>
                 </table>
             </div>
             <div class="row text-center" id="pagerdiv">

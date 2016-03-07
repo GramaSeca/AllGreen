@@ -40,11 +40,11 @@ public class ValidarLoginServlet extends HttpServlet {
             String senha = request.getParameter("allgreenSenha");
             
             UsuarioDAO dao = new UsuarioDAOJPA();
-            Usuario u = dao.findUsuarioLogin(usuario, senha);                        
+            Usuario u = dao.buscarUsuario(usuario);                        
                    
-            if(u != null){
+            if(u != null && u.getSenha().equals(senha)){
                 request.getSession().setAttribute("usuarioLogado", u);
-                response.sendRedirect("paginas/menu.jsp");
+                response.sendRedirect("menu");
             }else{
                 request.getSession().setAttribute("allgreenUsuario", usuario);
                 request.getSession().setAttribute("erro", "Usuário ou senha inválidos.");

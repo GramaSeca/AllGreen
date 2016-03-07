@@ -41,16 +41,19 @@ public class ItemServlet extends HttpServlet {
             System.out.println(logica);
             switch (logica) {
                 case "/salvar":
-                    this.salvar(request,response);
+                    this.salvar(request, response);
                     break;
-                    
+
+                case "/incluir":
+                    this.incluir(request, response);
+                    break;
+
                 case "/excluir":
                     this.excluir(request, response);
                     break;
-                    
-                case "/cadastro":
+
                 case "/alterar":
-                    this.cadastro(request, response);
+                    this.alterar(request, response);
                     break;
 
                 case "/consulta":
@@ -75,34 +78,38 @@ public class ItemServlet extends HttpServlet {
         item.setValorUnitario(Double.parseDouble(request.getParameter("itemValorUnitario")));
         item.setUm((String) request.getParameter("itemUm"));
         item.setEstoqueMinimo(Integer.parseInt(request.getParameter("itemEstoqueMinimo")));
-        item.setFornecedor((String) request.getParameter("itemFornecedor"));
-        
+
         ItemDAO dao = new ItemDAOJPA();
-        dao.save(item);
-        
+        dao.salvar(item);
+
         request.getRequestDispatcher("../Item/consulta").forward(request, response);
         this.destroy();
     }
-    
+
+    private void incluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.cadastro(request, response);
+    }
+
     private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int codigo = Integer.parseInt(request.getParameter("codigo"));
+        System.out.println("CodigoExcluir>>" + codigo);
         ItemDAO dao = new ItemDAOJPA();
-        
-        
+        dao.excluir(Item.class, codigo);
+
         request.getRequestDispatcher("../Item/consulta").forward(request, response);
         this.destroy();
     }
-    
-    private void cadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void alterar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String codigo = request.getParameter("codigo");
         System.out.println("codigo>>" + codigo);
-        
-        if(codigo != null && !codigo.equals("")){
+
+        if (codigo != null && !codigo.equals("")) {
             ItemDAO dao = new ItemDAOJPA();
-            request.setAttribute("item", dao.getById(Item.class, Integer.parseInt(codigo)));
+            request.setAttribute("item", dao.buscarPorCodigo(Item.class, Integer.parseInt(codigo)));
         }
-        
-        request.getRequestDispatcher("/paginas/item/cadastro.jsp").forward(request, response);
-        this.destroy();
+
+        this.cadastro(request, response);
     }
 
     private void consulta(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -125,6 +132,11 @@ public class ItemServlet extends HttpServlet {
         request.setAttribute("pagina", pagina);
 
         request.getRequestDispatcher("/paginas/item/consulta.jsp").forward(request, response);
+        this.destroy();
+    }
+
+    private void cadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/paginas/item/cadastro.jsp").forward(request, response);
         this.destroy();
     }
 
@@ -166,5 +178,4 @@ public class ItemServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

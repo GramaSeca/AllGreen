@@ -121,7 +121,7 @@ public class SessaoFilter implements Filter {
                 ((HttpServletResponse) response).sendRedirect("/AllGreen/login.jsp");
             /* Se está logado e está na página de login */
             } else if (usuario != null && pagina.equals("/login.jsp")) {
-                ((HttpServletResponse) response).sendRedirect("paginas/menu.jsp");
+                ((HttpServletResponse) response).sendRedirect("menu");
             /* Está logado e não está na página de login: continua normalmente */
             } else {
                 chain.doFilter(request, response);

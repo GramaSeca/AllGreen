@@ -4,7 +4,6 @@ import com.allgreensolutions.sistema.dao.UsuarioDAO;
 import com.allgreensolutions.sistema.model.Usuario;
 import com.allgreensolutions.sistema.util.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 /**
  *
@@ -13,9 +12,16 @@ import org.hibernate.Transaction;
 public class UsuarioDAOJPA extends DAOJPA<Usuario, Integer> implements UsuarioDAO {
 
     @Override
-    public Usuario findUsuarioLogin(String usuario, String senha) {
-        return (Usuario) HibernateUtil.openSession()
-                .createQuery("SELECT u FROM Usuario u WHERE u.usuario='" + usuario + "' AND u.senha='" + senha + "'")
-                .uniqueResult();
+    public Usuario buscarUsuario(String usuario) {
+        Session sessao = HibernateUtil.openSession();
+        try {
+            return (Usuario) sessao
+                    .createQuery("SELECT u FROM Usuario u WHERE u.usuario='" + usuario + "'")
+                    .uniqueResult();
+        } finally {
+            sessao.close();
+            System.out.println("FECHOU");
+        }
+
     }
 }

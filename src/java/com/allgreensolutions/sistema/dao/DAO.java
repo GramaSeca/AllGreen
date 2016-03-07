@@ -11,15 +11,15 @@ import javax.persistence.EntityManager;
  */
 public interface DAO<T, I> {
 
-    T save(T entity);
+    T salvar(T entity);
 
-    boolean remove(Class<T> classe, I pk);
+    boolean excluir(Class<T> classe, I pk);
 
     List<T> getAll(Class<T> classe);
 
     List<T> getAll(Class<T> classe, int min, int max);
 
-    T getById(Class<T> classe, I pk);
+    T buscarPorCodigo(Class<T> classe, I pk);
     
     T getFirst(Class<T> classe);
 
