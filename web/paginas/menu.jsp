@@ -48,7 +48,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#"target="iframe_content">Cadastro de Clientes</a></li>
                                 <li><a href="#" target="iframe_content">Cadastro de Fornecedores</a></li>
-                                <li><a href="../Item/incluir" target="iframe_content">Cadastro de Itens</a></li>
+                                <li><a href="Item/incluir" target="iframe_content">Cadastro de Itens</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Nav header</li>
                                 <li><a href="#" target="iframe_content">Separated link</a></li>
